@@ -16,7 +16,7 @@ class CityController extends Controller
      */
     public function index(Request $request)
     {
-        $city_param = $request->get('city');
+        $city_param = $request->get('city_name');
         $cities = City::where('name', 'like', "%${city_param}%")->orderBy('country')->get();
         return response()->json($cities);
     }

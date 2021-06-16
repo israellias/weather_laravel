@@ -1,8 +1,8 @@
 <?php
 
 use App\Http\Controllers\Api\CityController;
+use App\Http\Controllers\Api\WeatherController;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,17 +22,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::middleware('api')->group(function () {
     Route::resource('/cities', CityController::class)->only(['index']);
-    Route::get('/weather', function (Request $request) {
-        $url = config('services.open_weather_endpoint') . '/data/2.5/onecall';
-        $response = Http::get($url, [
-            'lon' => -63.166672,
-            'lat' => -17.799999,
-            'exclude' => 'minutely,hourly',
-            'units' => 'metric',
-            'appid' => config('services.open_weather_api_key'),
-            'lang' => 'es'
-        ]);
-        return $response->json();
-    });
+    Route::get('/weather', WeatherController::class);
 });
 
