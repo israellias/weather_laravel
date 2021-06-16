@@ -52,7 +52,8 @@ Route::middleware('api')->group(function() {
             'lat' => -17.799999,
             'exclude' => 'minutely,hourly',
             'units' => 'metric',
-            'appid' => config('services.open_weather_api_key')
+            'appid' => config('services.open_weather_api_key'),
+            'lang' => 'es'
         ]);
         return $response->json();
     });
