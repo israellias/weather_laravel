@@ -21,7 +21,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::middleware('api')->group(function () {
-    Route::resource('/city', CityController::class);
+    Route::resource('/cities', CityController::class)->only(['index']);
     Route::get('/weather', function (Request $request) {
         $url = config('services.open_weather_endpoint') . '/data/2.5/onecall';
         $response = Http::get($url, [
