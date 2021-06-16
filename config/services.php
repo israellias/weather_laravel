@@ -29,5 +29,9 @@ return [
         'secret' => env('AWS_SECRET_ACCESS_KEY'),
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
-
+    /**
+     * Get api key from https://openweathermap.org/appid
+     */
+    'open_weather_endpoint' => 'https://api.openweathermap.org',
+    'open_weather_api_key' => env('OPEN_WEATHER_API_KEY'),
 ];
