@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
 use App\Models\City;
 use Illuminate\Http\Request;
 
@@ -10,11 +11,14 @@ class CityController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $city_param = $request->get('city');
+        $cities = City::where('name', 'like', "%${city_param}%")->orderBy('country')->get();
+        return response()->json($cities);
     }
 
     /**
@@ -30,7 +34,7 @@ class CityController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -41,7 +45,7 @@ class CityController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\City  $city
+     * @param \App\Models\City $city
      * @return \Illuminate\Http\Response
      */
     public function show(City $city)
@@ -52,7 +56,7 @@ class CityController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\City  $city
+     * @param \App\Models\City $city
      * @return \Illuminate\Http\Response
      */
     public function edit(City $city)
@@ -63,8 +67,8 @@ class CityController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\City  $city
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\City $city
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, City $city)
@@ -75,7 +79,7 @@ class CityController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\City  $city
+     * @param \App\Models\City $city
      * @return \Illuminate\Http\Response
      */
     public function destroy(City $city)
